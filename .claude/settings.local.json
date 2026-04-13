@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(cp /c/Users/BSCPLC-IIG-NOC/.claude/skills/google-stitch-to-vercel/SKILL.md /tmp/stitch-vercel-skill-agent/skills/google-stitch-to-vercel/SKILL.md)",
+      "Bash(cp /c/Users/BSCPLC-IIG-NOC/.claude/agents/stitch-vercel.md /tmp/stitch-vercel-skill-agent/agents/stitch-vercel.md)"
+    ]
+  }
+}
