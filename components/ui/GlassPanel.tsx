@@ -3,10 +3,11 @@ import { cn } from '@/lib/utils'
 interface GlassPanelProps {
   children: React.ReactNode
   className?: string
+  innerClassName?: string
   style?: React.CSSProperties
 }
 
-export function GlassPanel({ children, className, style }: GlassPanelProps) {
+export function GlassPanel({ children, className, innerClassName, style }: GlassPanelProps) {
   return (
     <div
       style={style}
@@ -15,7 +16,6 @@ export function GlassPanel({ children, className, style }: GlassPanelProps) {
         'backdrop-blur-xl overflow-hidden',
         className
       )}
-      // Surface var at 60% opacity via inline style since Tailwind v4 opacity modifier syntax differs
     >
       {/* Glass gradient edge */}
       <div
@@ -32,7 +32,7 @@ export function GlassPanel({ children, className, style }: GlassPanelProps) {
         className="pointer-events-none absolute inset-0"
         style={{ background: 'rgba(58,60,64,0.6)', backdropFilter: 'blur(20px)' }}
       />
-      <div className="relative z-10">{children}</div>
+      <div className={cn('relative z-10', innerClassName)}>{children}</div>
     </div>
   )
 }
