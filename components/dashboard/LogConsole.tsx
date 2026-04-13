@@ -63,10 +63,10 @@ export function LogConsole({ links, outages, maxEntries = 200, searchTerm = '', 
     ...links.map(linkToLog),
     ...outages.map(outageToLog),
   ]
-    .sort((a, b) => new Date(b.ts).getTime() - new Date(a.ts).getTime())
-    .slice(0, maxEntries)
+    .sort((a, b) => new Date(a.ts).getTime() - new Date(b.ts).getTime())
     .filter(e => levelFilter === 'ALL' || e.level === levelFilter)
     .filter(e => !searchTerm || e.message.toLowerCase().includes(searchTerm.toLowerCase()))
+    .slice(-maxEntries)
 
   useEffect(() => {
     if (!userScrolled) bottomRef.current?.scrollIntoView({ behavior: 'smooth' })
@@ -80,7 +80,7 @@ export function LogConsole({ links, outages, maxEntries = 200, searchTerm = '', 
     >
       <div
         className="flex items-center justify-between px-4 py-2 shrink-0"
-        style={{ borderBottom: '1px solid rgba(255,255,255,0.05)' }}
+        style={{ background: 'rgba(255,255,255,0.03)' }}
       >
         <span
           className="text-[10px] font-semibold tracking-widest"

@@ -11,7 +11,9 @@ import { StatusDot } from '@/components/ui/StatusDot'
 import type { ParsedLink } from '@/lib/link-parser'
 
 function timeAgo(iso: string): string {
-  const diff = Date.now() - new Date(iso).getTime()
+  const ts = new Date(iso).getTime()
+  if (isNaN(ts)) return '—'
+  const diff = Math.max(0, Date.now() - ts)
   const mins = Math.floor(diff / 60000)
   if (mins < 60) return `${mins}m ago`
   const hrs = Math.floor(mins / 60)
