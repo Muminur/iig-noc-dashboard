@@ -5,8 +5,20 @@ export interface OutageRecord {
   downAtISO: string
   upAtISO?: string
   linkLabel: string
-  duration?: number
+  rawLinkName?: string
+  interface?: string
+  sourceNode?: string
+  isBackhaul?: boolean
+  backhaulProvider?: string
+  priorityClass?: number
+  downAt?: number
+  emailSent?: boolean
+  upEmailSent?: boolean
+  clientName?: string
   bandwidth?: string
+  clientBandwidth?: string
+  circuitId?: string
+  routePath?: string
 }
 
 export function useOutages() {
