@@ -1,4 +1,5 @@
 'use client'
+import { useEffect, useState } from 'react'
 import { RadialBarChart, RadialBar, ResponsiveContainer } from 'recharts'
 import { GlassPanel } from '@/components/ui/GlassPanel'
 
@@ -6,7 +7,13 @@ const TOTAL_LINKS = 50
 
 export function NetworkIntegrity({ downCount }: { downCount: number }) {
   const uptime = Math.max(0, Math.round(((TOTAL_LINKS - downCount) / TOTAL_LINKS) * 1000) / 10)
-  const latency = (28 + Math.sin(Date.now() / 10000) * 2).toFixed(1)
+  const [latency, setLatency] = useState('28.0')
+  useEffect(() => {
+    const update = () => setLatency((28 + Math.sin(Date.now() / 10000) * 2).toFixed(1))
+    update()
+    const id = setInterval(update, 3000)
+    return () => clearInterval(id)
+  }, [])
   const gaugeData = [{ name: 'uptime', value: uptime, fill: 'var(--color-secondary)' }]
 
   return (

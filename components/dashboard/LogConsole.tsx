@@ -14,6 +14,11 @@ interface LogEntry {
   source: string
 }
 
+function safeTime(ts: string): string {
+  const d = new Date(ts)
+  return isNaN(d.getTime()) ? '--:--:--' : d.toISOString().slice(11, 19)
+}
+
 const levelColor: Record<LogLevel, string> = {
   CRITICAL: 'var(--color-error)',
   ALERT:    'var(--color-amber)',
@@ -97,7 +102,7 @@ export function LogConsole({ links, outages, maxEntries = 200, searchTerm = '', 
         {entries.map(entry => (
           <div key={entry.id} className="flex gap-3 leading-5">
             <span className="shrink-0 tabular-nums" style={{ color: 'rgba(226,226,232,0.25)' }}>
-              {new Date(entry.ts).toISOString().slice(11, 19)}
+              {safeTime(entry.ts)}
             </span>
             <span className="w-16 shrink-0 font-semibold tabular-nums" style={{ color: levelColor[entry.level] }}>
               [{entry.level.slice(0, 4)}]

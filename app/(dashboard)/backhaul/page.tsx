@@ -45,7 +45,7 @@ export default function BackhaulPage() {
                 <td className="px-4 py-2.5 tabular-nums" style={{ color: 'var(--color-primary)', fontFamily: 'var(--font-mono)' }}>{link.bandwidth.out}</td>
                 <td className="px-4 py-2.5"><SeverityBadge severity={link.severity} /></td>
                 <td className="px-4 py-2.5 tabular-nums" style={{ color: 'rgba(226,226,232,0.4)', fontFamily: 'var(--font-mono)', fontSize: 10 }}>
-                  {new Date(link.downAtISO).toISOString().slice(0, 16).replace('T', ' ')}
+                  {(() => { const d = new Date(link.downAtISO); return isNaN(d.getTime()) ? '—' : d.toISOString().slice(0, 16).replace('T', ' ') })()}
                 </td>
               </tr>
             ))}

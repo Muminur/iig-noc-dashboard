@@ -25,7 +25,7 @@ export function Sidebar() {
       {/* Logo */}
       <div className="px-5 pt-6 pb-4" style={{ borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
         <p className="font-bold text-sm tracking-widest uppercase" style={{ color: 'var(--color-primary)', fontFamily: 'var(--font-display)' }}>
-          Sentinel NOC
+          BSCPLC IIG NOC INCIDENT CENTER
         </p>
         <p className="text-[10px] mt-0.5 tracking-wider" style={{ color: 'rgba(226,226,232,0.4)' }}>IIG · BSCPLC</p>
         <span className="mt-2 inline-flex items-center gap-1.5 text-[9px]" style={{ color: 'rgba(69,254,201,0.8)', fontFamily: 'var(--font-mono)' }}>

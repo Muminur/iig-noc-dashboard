@@ -72,7 +72,7 @@ function IncidentCard({ link, accent }: { link: ParsedLink; accent: 'red' | 'ora
           <Clock className="w-3 h-3" style={{ color: 'rgba(226,226,232,0.3)' }} />
           <span style={{ color: 'rgba(226,226,232,0.4)' }}>{timeAgo(link.downAtISO)}</span>
           <span className="ml-auto text-[10px] tabular-nums" style={{ fontFamily: 'var(--font-mono)' }}>
-            {new Date(link.downAtISO).toLocaleDateString()}
+            {isNaN(new Date(link.downAtISO).getTime()) ? '—' : new Date(link.downAtISO).toLocaleDateString()}
           </span>
         </div>
       </div>
