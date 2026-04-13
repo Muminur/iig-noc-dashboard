@@ -6,7 +6,7 @@ import type { OutageRecord } from '@/hooks/useOutages'
 
 type LogLevel = 'CRITICAL' | 'ALERT' | 'UPDATE' | 'LOG' | 'INFO'
 
-interface LogEntry {
+export interface LogEntry {
   id: string
   ts: string
   level: LogLevel
@@ -27,7 +27,7 @@ const levelColor: Record<LogLevel, string> = {
   INFO:     'rgba(226,226,232,0.4)',
 }
 
-function linkToLog(link: ParsedLink): LogEntry {
+export function linkToLog(link: ParsedLink): LogEntry {
   return {
     id: `dl-${link.raw}`,
     ts: link.downAtISO,
@@ -37,7 +37,7 @@ function linkToLog(link: ParsedLink): LogEntry {
   }
 }
 
-function outageToLog(o: OutageRecord, idx: number): LogEntry {
+export function outageToLog(o: OutageRecord, idx: number): LogEntry {
   return {
     id: `out-${idx}-${o.downAtISO}`,
     ts: o.downAtISO,
@@ -73,7 +73,11 @@ export function LogConsole({ links, outages, maxEntries = 200, searchTerm = '', 
   }, [entries.length, userScrolled])
 
   return (
-    <GlassPanel className="flex flex-col" style={{ height: '260px' }}>
+    <GlassPanel
+      className="overflow-hidden"
+      innerClassName="flex flex-col h-full"
+      style={{ height: '100%' }}
+    >
       <div
         className="flex items-center justify-between px-4 py-2 shrink-0"
         style={{ borderBottom: '1px solid rgba(255,255,255,0.05)' }}
@@ -84,15 +88,28 @@ export function LogConsole({ links, outages, maxEntries = 200, searchTerm = '', 
         >
           LIVE LOG CONSOLE
         </span>
-        <span
-          className="text-[10px] tabular-nums"
-          style={{ color: 'var(--color-secondary)', fontFamily: 'var(--font-mono)' }}
-        >
-          {entries.length} ENTRIES
-        </span>
+        <div className="flex items-center gap-3">
+          <span
+            className="text-[10px] tabular-nums"
+            style={{ color: 'var(--color-secondary)', fontFamily: 'var(--font-mono)' }}
+          >
+            {entries.length} ENTRIES
+          </span>
+          <button
+            onClick={() => setUserScrolled(s => !s)}
+            className="text-[9px] font-semibold px-1.5 py-0.5 rounded transition-colors tabular-nums"
+            style={{
+              fontFamily: 'var(--font-mono)',
+              background: userScrolled ? 'rgba(251,191,36,0.1)' : 'rgba(69,254,201,0.08)',
+              color: userScrolled ? 'var(--color-amber)' : 'var(--color-secondary)',
+            }}
+          >
+            {userScrolled ? '‖ PAUSED' : '▼ AUTO'}
+          </button>
+        </div>
       </div>
       <div
-        className="flex-1 overflow-y-auto px-4 py-2 space-y-1"
+        className="flex-1 overflow-y-auto px-4 py-2 space-y-1 min-h-0"
         style={{ fontFamily: 'var(--font-mono)', fontSize: 11 }}
         onScroll={e => {
           const el = e.currentTarget
