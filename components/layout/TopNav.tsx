@@ -5,10 +5,10 @@ import { cn } from '@/lib/utils'
 import { Search, Bell, Settings, User } from 'lucide-react'
 
 const TABS = [
-  { href: '/incidents', label: 'GLOBAL' },
-  { href: '/backhaul',  label: 'TRAFFIC' },
-  { href: '/logs',      label: 'SECURITY' },
-  { href: '/analytics', label: 'INFRA' },
+  { href: '/incidents', label: 'DHAKA NOC'  },
+  { href: '/backhaul',  label: 'BACKHAUL'   },
+  { href: '/logs',      label: 'EVENTS LOG' },
+  { href: '/analytics', label: 'ANALYTICS'  },
 ]
 
 export function TopNav() {

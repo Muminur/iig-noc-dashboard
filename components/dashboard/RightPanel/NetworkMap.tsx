@@ -31,7 +31,7 @@ export function NetworkMap({ links }: { links: ParsedLink[] }) {
     <GlassPanel className="p-3">
       <div className="flex items-center justify-between mb-2">
         <span className="text-[10px] font-semibold tracking-widest uppercase" style={{ color: 'rgba(226,226,232,0.4)' }}>
-          KXT Node Cluster Map
+          KKT Node Cluster Map
         </span>
         <span className="text-[10px] tabular-nums" style={{ color: 'var(--color-secondary)', fontFamily: 'var(--font-mono)' }}>
           {NETWORK_NODES.length} NODES
