@@ -13,7 +13,7 @@ export function StatusDot({ color = 'green', size = 8 }: { color?: StatusColor; 
     <span className="relative inline-flex" style={{ width: size, height: size }}>
       <span
         className="absolute inset-0 rounded-full animate-ping"
-        style={{ background: c, opacity: 0.25 }}
+        style={{ background: c, opacity: 0.2 }}
       />
       <span
         className="relative inline-flex rounded-full"
