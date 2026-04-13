@@ -4,6 +4,7 @@ import { useOutages } from '@/hooks/useOutages'
 import { GlassPanel } from '@/components/ui/GlassPanel'
 import { SeverityBadge } from '@/components/ui/SeverityBadge'
 import { BackhaulDistribution } from '@/components/dashboard/RightPanel/BackhaulDistribution'
+import { BACKHAUL_PROVIDERS } from '@/data/mock-providers'
 import type { OutageRecord } from '@/hooks/useOutages'
 
 const KNOWN_PROVIDERS = ['SMW4', 'SMW5'] as const
@@ -34,14 +35,14 @@ function ProviderBadge({ provider }: { provider?: string }) {
 
 function outageBorderColor(r: OutageRecord): string {
   if (r.priorityClass === 1) return 'var(--color-error)'
-  if (r.priorityClass === 2) return 'var(--color-tertiary)'
-  return 'var(--color-amber)'
+  if (r.priorityClass === 2) return 'var(--color-amber)'
+  return 'var(--color-primary)'
 }
 
 const LINK_SEVERITY_BORDER: Record<string, string> = {
   CRITICAL: 'var(--color-error)',
-  HIGH:     'var(--color-tertiary)',
-  MEDIUM:   'var(--color-amber)',
+  HIGH:     'var(--color-amber)',
+  MEDIUM:   'var(--color-primary)',
   LOW:      'rgba(226,226,232,0.2)',
 }
 
@@ -152,6 +153,7 @@ export default function BackhaulPage() {
             {PROVIDER_CARDS.map(p => {
               const isDown = providerHasOutage(p.name)
               const count = providerOutageCount(p.name)
+              const share = BACKHAUL_PROVIDERS.find(bp => bp.name === p.name)?.percentage ?? 0
               return (
                 <GlassPanel
                   key={p.name}
@@ -169,11 +171,9 @@ export default function BackhaulPage() {
                       {isDown ? 'DEGRADED' : 'ONLINE'}
                     </span>
                   </div>
-                  {count > 0 && (
-                    <p className="text-[10px] mt-1" style={{ color: 'rgba(226,226,232,0.4)', fontFamily: 'var(--font-mono)' }}>
-                      {count} active outage{count > 1 ? 's' : ''}
-                    </p>
-                  )}
+                  <p className="text-[10px] mt-1 tabular-nums" style={{ color: 'rgba(226,226,232,0.4)', fontFamily: 'var(--font-mono)' }}>
+                    {share}%{count > 0 ? ` · ${count} circuit${count > 1 ? 's' : ''}` : ''}
+                  </p>
                 </GlassPanel>
               )
             })}

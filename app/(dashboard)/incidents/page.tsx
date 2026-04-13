@@ -21,8 +21,8 @@ function timeAgo(iso: string): string {
 
 const STAT_TILES = [
   { key: 'critical' as const, label: 'CRITICAL',   color: 'var(--color-error)',      bg: 'rgba(255,100,100,0.08)',  border: 'rgba(255,100,100,0.4)'  },
-  { key: 'high'     as const, label: 'HIGH',        color: 'var(--color-tertiary)',   bg: 'rgba(255,231,226,0.06)', border: 'rgba(255,231,226,0.3)'  },
-  { key: 'medium'   as const, label: 'MEDIUM',      color: 'var(--color-amber)',      bg: 'rgba(251,191,36,0.06)',  border: 'rgba(251,191,36,0.3)'   },
+  { key: 'high'     as const, label: 'HIGH',        color: 'var(--color-amber)',      bg: 'rgba(255,180,0,0.08)',   border: 'rgba(255,180,0,0.4)'    },
+  { key: 'medium'   as const, label: 'MEDIUM',      color: 'var(--color-primary)',    bg: 'rgba(0,218,243,0.08)',   border: 'rgba(0,218,243,0.3)'    },
   { key: 'total'    as const, label: 'TOTAL DOWN',  color: 'var(--color-on-surface)', bg: 'rgba(255,255,255,0.03)', border: 'rgba(255,255,255,0.1)'  },
 ]
 
